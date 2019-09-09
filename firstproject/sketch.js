@@ -19,10 +19,10 @@ function draw() {
 
   redamount+=redchangeamount;
 
-  if (redchangeamount >= 255){
+  if (redamount >= 255){
      redchangeamount *= -1;
   }
-  if (redchangeamount <= 0){
+  if (redamount <= 0){
     redchangeamount *= -1
   }
   console.log(redamount);

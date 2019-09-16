@@ -33,6 +33,30 @@ function setup() {
 
 function draw(){
   background(255);
+  moveMav();
+  //thatcherMove();
   image(maverick, mavX, mavY, 150, 150);
   image(thatcher, thatX, thatY, 150, 175);
+}
+
+function moveMav(){
+  if (mavY > 0 && (mavY + 150) < height){
+    if (keyIsDown(87)){
+      (mavY -= 5);
+    }
+    else if (keyIsDown(83)){
+      (mavY += 5);
+    }
+  }
+  else if (mavY > 0){
+    (mavY -= 5);
+  }
+  else if ((mavY +150) < height){
+    (mavY += 5);
+  }
+}
+function thatcherMove(){
+  if (thatY > 0 && (thatY + 175) > 0){
+    (thatY += random(-20,20))
+  }
 }

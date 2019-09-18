@@ -19,6 +19,7 @@ let thatX;
 let empX;
 let empY;
 let empDX;
+let hasFired;
 
 function preload(){
   thatcher = loadImage("assets/deletthis.png");
@@ -46,59 +47,66 @@ function draw(){
   background(consulate);
   moveMav();
   thatcherMove();
-  image(maverick, mavX, mavY, 150, 150);
+  image(maverick, mavX, mavY, 150, 165);
   image(emp, empX, empY, 90, 50)
-  image(thatcher, thatX, thatY, 150, 175);
+  image(thatcher, thatX, thatY, 150, 165);
 }
 
 function moveMav(){
   if (mavY > 0 && (mavY + 150) < height){
     if (keyIsDown(87)){
-      (mavY -= 5);
+      mavY -= 10;
     }
     else if (keyIsDown(83)){
-      (mavY += 5);
+      mavY += 10;
     }
   }
   else if (mavY > 0){
-    (mavY -= 5);
+    mavY -= (height - 165);
   }
   else if ((mavY + 150) < height){
-    (mavY += 5);
+    mavY += (height-150);
   }
   if (mavX > 0 && (mavX + 150) < width){
     if (keyIsDown(65)){
-      (mavX -= 5);
+      mavX -= 10;
     }
     else if (keyIsDown(68)){
-      (mavX += 5)
+      mavX += 10;
     }
   }
   else if (mavX > 0){
-    (mavX -= 5);
+    mavX -= (width - 165);
   }
   else if ((mavX + 150) < height){
-    (mavX += 5);
+    mavX += (width + 165);
   }
 }
 function thatcherMove(){
   if (thatY === mavY){
+    hasFired = true;
     launch();
   }
   else if (thatY < mavY){
-    (thatY += 2.5);
+    thatY += 5;
   }
-  else if (thatY > mavY){
-    (thatY -= 2.5);
+  else if (thatY  > mavY){
+    thatY -= 5;
   }
 }
 
 function launch(){
-  if (empX < width){
-    (empX += empDX);
+  if (hasFired = true){
+    if (empX < width){
+      empX += empDX;
+    }
+    else{
+      hasFired = false;
+    }
+    
   }
   else{
-    (empX = thatX);
-    (empY = (thatY+75));
+    empX = thatX;
+    empY = thatY+65;
   }
 }

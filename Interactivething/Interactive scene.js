@@ -38,7 +38,7 @@ function setup() {
   thatX = ((windowHeight/6));
   empX = thatX;
   empY = thatY;
-  empDX = 10;
+  empDX = 15;
 
   background(255);
 }
@@ -55,10 +55,10 @@ function draw(){
 function moveMav(){
   if (mavY > 0 && (mavY + 150) < height){
     if (keyIsDown(87)){
-      mavY -= 10;
+      mavY -= 5;
     }
     else if (keyIsDown(83)){
-      mavY += 10;
+      mavY += 5;
     }
   }
   else if (mavY > 0){
@@ -69,44 +69,42 @@ function moveMav(){
   }
   if (mavX > 0 && (mavX + 150) < width){
     if (keyIsDown(65)){
-      mavX -= 10;
+      mavX -= 5;
     }
     else if (keyIsDown(68)){
-      mavX += 10;
+      mavX += 5;
     }
   }
   else if (mavX > 0){
-    mavX -= (width - 165);
+    mavX -= 0.5;
   }
   else if ((mavX + 150) < height){
-    mavX += (width + 165);
-  }
-}
-function thatcherMove(){
-  if (thatY === mavY){
-    hasFired = true;
-    launch();
-  }
-  else if (thatY < mavY){
-    thatY += 5;
-  }
-  else if (thatY  > mavY){
-    thatY -= 5;
+    mavX += 0.5;
   }
 }
 
-function launch(){
-  if (hasFired = true){
-    if (empX < width){
+function thatcherMove(){
+  if (thatY === mavY){
+    hasFired = true;
+  }
+  else if (thatY < mavY){
+    thatY += 2.5;
+  }
+  else if (thatY > mavY){
+    thatY -= 2.5;
+  }
+  if (empX < width){
+    if (hasFired = true){
       empX += empDX;
     }
     else{
-      hasFired = false;
+      empX = thatX;
+      empY = thatY+65;
     }
-    
   }
   else{
     empX = thatX;
     empY = thatY+65;
+    hasFired = false;
   }
 }

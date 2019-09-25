@@ -1,10 +1,11 @@
-// Line art demo
-// Your Name
-// Date
+// Interactive scene
+// Aiden Jorgensen
+// Wednesday September 25 2019
 //
 // Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// - Thatcher yells when emp grenades are thrown
 
+//creation my list of variables
 let thatcher;
 let maverick;
 let emp;
@@ -30,6 +31,7 @@ let youWin;
 let youDied;
 let thatMove;
 
+//loading all the images
 function preload(){
   maverick = loadImage("assets/Mavchibi.png");
   emp = loadImage('assets/empnade.png');
@@ -41,7 +43,7 @@ function preload(){
   youDied = loadImage('assets/youdied.jpg')
 }
 
-
+//setting my variables tjhat are needed right away as well as making the canvas
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
@@ -58,6 +60,7 @@ function setup() {
   background(255);
 }
 
+//calling all the functions here as well as spawning the images
 function draw(){
   background(consulate);
   moveMav();
@@ -68,8 +71,10 @@ function draw(){
   image(torch, (mavX - 80), (mavY+30), 90, 90);
   image(emp, empX, empY, 90, 50);
   image(thatcher, thatX, thatY, 150, 165);
+  
 }
 
+//this is Mvaericks movement code
 function moveMav(){
   fireY = (mavY + 7);
   if (canMove === true){
@@ -104,6 +109,7 @@ function moveMav(){
   }
 }
 
+//this is thatcher's movement code
 function thatcherMove(){
   if (thatMove === true){
     if (thatY === mavY && mavX > thatX){
@@ -132,6 +138,7 @@ function thatcherMove(){
   }
 }
 
+//this is the functional part of the torch and freezing Maverick while the torch is active
 function tortch(){
   if (mouseIsPressed){
     image(fire, firex, fireY, firesize, 30);
@@ -146,15 +153,16 @@ function tortch(){
   }
 }
 
+//function that controls winning and loosing
 function contact(){
   if (empX < mavX + 165 && empX > mavX && empY > mavY && empY < mavY + 150){
-    image(youDied, 0,0,windowWidth, windowHeight)
-    thatMove = false;
-    canMove = false;
+    image(youDied, 0,0,windowWidth, windowHeight);
+    noLoop();
   }
-  if ((firex+firesize) < thatX + 165 && (firex+firesize) > thatX && fireY > thatY && fireY < thatY + 150){
-    image(youWin, 0,0,windowWidth, windowHeight);
-    thatMove = false;
-    canMove = false;
+  if (firex < thatX + 150 && firex > thatX && fireY > thatY && fireY < thatY + 150){
+    if (mouseIsPressed){
+      image(youWin, 0,0,windowWidth, windowHeight);
+      noLoop();
+    }
   }
 }

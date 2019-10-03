@@ -63,7 +63,6 @@ function checkButton(){
   if(mouseIsPressed){
     //check for rectangle button
     if (mouseX > width/2 - 200 && mouseX < width/2 + 200 && mouseY > height/2 - 100 - 75 && mouseY < height/2 - 100 + 75){
-      console.log("here")
       state = "rectangle";
     }
     //check for circle

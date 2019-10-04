@@ -50,7 +50,11 @@ function displayGenres(){
   rect(windowWidth - (windowWidth/10), 0, windowWidth/10, windowHeight*2);
   ellipse(windowWidth/5 + 150, windowHeight/4, 90);
   ellipse(windowWidth/5 + 150, windowHeight/4 + (windowHeight/4), 90);
+  ellipse(windowWidth/5 + 150, windowHeight/4 + 2*(windowHeight/4), 90);
+  ellipse(3* windowWidth/5 + 150, windowHeight/4 + 2*(windowHeight/4), 90);
   fill(0);
-  text("Rock page 1", windowWidth/5, windowHeight/4);
-  text("Rock page 2", windowWidth/5, windowHeight/4 + (windowHeight/4));
+  text("Classic Rock", windowWidth/5, windowHeight/4);
+  text("Punk Rock", windowWidth/5, windowHeight/4 + (windowHeight/4));
+  text("Memes", windowWidth/5, windowHeight/4 + 2*(windowHeight/4));
+  text("New Rock", (3* windowWidth/5), windowHeight/4 + 2*(windowHeight/4))
 }

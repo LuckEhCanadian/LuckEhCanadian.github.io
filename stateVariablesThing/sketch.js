@@ -12,9 +12,17 @@ let optionC;
 let optionD;
 let optionE;
 let optionF;
+let font;
+
+function preload(){
+  font = loadFont('assets/rock_font.ttf');
+}
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(0, 0, 0);
+  textFont(font);
+  textSize(36)
 }
 
 function draw() {
@@ -102,17 +110,49 @@ function displayMain(){
   rectMode(CORNER);
   rect(0,0,windowWidth/10, windowHeight*2);
   rect(windowWidth - (windowWidth/10), 0, windowWidth/10, windowHeight*2);
-  ellipse(windowWidth/5 + 150, windowHeight/4, 90);
-  ellipse(windowWidth/5 + 150, windowHeight/4 + (windowHeight/4), 90);
-  ellipse(windowWidth/5 + 150, windowHeight/4 + 2*(windowHeight/4), 90);
-  ellipse(3* windowWidth/5 + 150, windowHeight/4 + 2*(windowHeight/4), 90);
-  ellipse(3* windowWidth/5 + 150, windowHeight/4 + (windowHeight/4), 90);
-  ellipse(3* windowWidth/5 + 150, windowHeight/4, 90);
+  ellipse(1.1* windowWidth/5 - 100, windowHeight/4, 90);
+  ellipse(1.1* windowWidth/5 - 100, windowHeight/4 + (windowHeight/4), 90);
+  ellipse(1.1* windowWidth/5 - 100, windowHeight/4 + 2*(windowHeight/4), 90);
+  ellipse(3.18* windowWidth/5 - 100, windowHeight/4 + 2*(windowHeight/4), 90);
+  ellipse(3.18* windowWidth/5 - 100, windowHeight/4 + (windowHeight/4), 90);
+  ellipse(3.18* windowWidth/5 - 100, windowHeight/4, 90);
   fill(0);
-  text(optionA, windowWidth/5, windowHeight/4);
+  text(optionA,windowWidth/5, windowHeight/4);
   text(optionB, windowWidth/5, windowHeight/4 + (windowHeight/4));
   text(optionC, windowWidth/5, windowHeight/4 + 2*(windowHeight/4));
-  text(optionD, (3* windowWidth/5), windowHeight/4);
-  text(optionE, (3* windowWidth/5), windowHeight/4 + (windowHeight/4));
-  text(optionF, (3* windowWidth/5), windowHeight/4 + 2*(windowHeight/4));
+  text(optionD, (3.1* windowWidth/5), windowHeight/4);
+  text(optionE, (3.1* windowWidth/5), windowHeight/4 + (windowHeight/4));
+  text(optionF, (3.1* windowWidth/5), windowHeight/4 + 2*(windowHeight/4));
+}
+
+function displayClassic(){
+  optionA = "1.Immigrant Song - Led Zepplin";
+  optionB = "3.Paradice City - Guns & Roses";
+  optionC = "4.For Those About To Rock - ACDC";
+  optionD = "2.Fox On The Run - Sweet";
+  optionE = '5.Bohemian Rhasody - Queen'
+  optionF = '6.Gimme Shelter - The Rolling Stones'
+  displayMain();
+  wait(1500);
+  if (keyIsPressed){
+    if (keyCode === 49 ||keyCode === 35){
+        window.open('https://www.youtube.com/watch?v=y8OtzJtp-EM');
+    }
+    else if (keyCode === 50 ||keyCode === 40){
+      window.open('https://www.youtube.com/watch?v=qBdFA6sI6-8');
+    }
+    else if (keyCode === 51 ||keyCode === 34){
+      window.open('https://www.youtube.com/watch?v=T0ZmErXkbxE');
+    }
+    else if (keyCode === 52 ||keyCode === 37){
+      window.open('https://www.youtube.com/watch?v=fKhTk0IynHM');
+    }
+    else if (keyCode === 53 ||keyCode === 12){
+      window.open('https://www.youtube.com/watch?v=MhkPWV97GQU');
+    }
+    else if (keyCode === 54 ||keyCode === 39){
+      window.open('https://www.youtube.com/watch?v=EJRdDhnTRoo')
+      
+    }
+  }
 }

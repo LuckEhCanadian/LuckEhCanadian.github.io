@@ -97,7 +97,9 @@ function keyPressed() {
     }
     else if (keyCode === 54 ||keyCode === 39){
       window.open('https://www.youtube.com/watch?v=EJRdDhnTRoo');
-      
+    }
+    else if (keyCode === 27){
+      state = 'genreSelect'
     }
   }
   else if (state === "punkRock"){
@@ -117,8 +119,10 @@ function keyPressed() {
       window.open('https://www.youtube.com/watch?v=hTWKbfoikeg');
     }
     else if (keyCode === 54 ||keyCode === 39){
-      window.open('https://www.youtube.com/watch?v=JoC3PUBmhFs');
-      
+      window.open('https://www.youtube.com/watch?v=JoC3PUBmhFs'); 
+    }
+    else if (keyCode === 27){
+      state = 'genreSelect'
     }
   }
   else if (state === "altRock"){
@@ -138,8 +142,10 @@ function keyPressed() {
       window.open('https://www.youtube.com/watch?v=LAZUsCONjIQ');
     }
     else if (keyCode === 54 ||keyCode === 39){
-      window.open('https://www.youtube.com/watch?v=XFkzRNyygfk');
-      
+      window.open('https://www.youtube.com/watch?v=XFkzRNyygfk'); 
+    }
+    else if (keyCode === 27){
+      state = 'genreSelect'
     }
   }
   else if(state === "popIsh"){
@@ -161,6 +167,9 @@ function keyPressed() {
     else if (keyCode === 54 ||keyCode === 39){
       window.open('https://www.youtube.com/watch?v=XFkzRNyygfk');
       
+    }
+    else if (keyCode === 27){
+      state = 'genreSelect'
     }
   }
 }
@@ -253,9 +262,9 @@ function displayAlt(){
 function displayPopIsh(){
   optionA = "1.Come And Get Your Love - Redbone";
   optionB = "3.Mr. Blue Sky - Electric Light Orchestra";
-  optionC = "5.New Orleans Is Sinking - The Tragically Hip";
+  optionC = "5.Hit It - Americain Authors";
   optionD = "2.Happier - Marshmello";
-  optionE = '4.'
-  optionF = '6.Creep - Radio Head'
+  optionE = '4.Blow - Ed Sheeran'
+  optionF = '6.HeartBeat - Verite'
   displayMain();
 }

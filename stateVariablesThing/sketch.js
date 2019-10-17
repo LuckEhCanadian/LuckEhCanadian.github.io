@@ -13,6 +13,7 @@ let optionD;
 let optionE;
 let optionF;
 let font;
+let songHistory = [];
 
 function preload(){
   font = loadFont('assets/rock_font.ttf');
@@ -54,7 +55,7 @@ function draw() {
   }
   else if (state === 'oddBalls'){
     textSize(26);
-    displayOdd();
+    displayHistory();
   }
 }
 
@@ -70,18 +71,19 @@ function keyPressed() {
       state = "punkRock";
     }
     else if (keyCode === 52 ||keyCode === 37){
-      state = "oddBalls"
+      state = "popIsh"
     }
     else if (keyCode === 53 ||keyCode === 12){
       state = "memes"
     }
     else if (keyCode === 54 ||keyCode === 39){
-      state = "popIsh"
+      state = "history"
     }
   }
   else if(state === "classicRock"){
     if (keyCode === 49 ||keyCode === 35){
         window.open('https://www.youtube.com/watch?v=y8OtzJtp-EM');
+        songHistory.push('Immigrant Song - Led Zepplin');
     }
     else if (keyCode === 50 ||keyCode === 40){
       window.open('https://www.youtube.com/watch?v=qBdFA6sI6-8');
@@ -172,6 +174,11 @@ function keyPressed() {
       state = 'genreSelect'
     }
   }
+  else if(state === "history"){
+    if (keyCode === 27){
+      state = 'genreSelect'
+    }
+  }
 }
 
 
@@ -202,8 +209,8 @@ function displayGenres(){
   optionB = "3.Punk Rock";
   optionC = '5.Memes'
   optionD = "2.Alternative Rock";
-  optionE = "4.Oddballs";
-  optionF = '6.Pop-ish'
+  optionE = "4.Pop-ish";
+  optionF = "6.History";
   displayMain();
 }
 
@@ -266,5 +273,25 @@ function displayPopIsh(){
   optionD = "2.Happier - Marshmello";
   optionE = '4.Blow - Ed Sheeran'
   optionF = '6.HeartBeat - Verite'
+  displayMain();
+}
+
+function displayMemes(){
+  optionA = "1.Mii Channel Theme - Nintendo";
+  optionB = "3.Ra Ra Rasputin - Boney M.";
+  optionC = "5.Spooky Scary Skeletons - Andrew Gold";
+  optionD = "2.Chop Seuy! - System Of A Down";
+  optionE = '4.All Star - Smash Mouth'
+  optionF = '6.Africa - Toto'
+  displayMain();
+}
+
+function displayHistory(){
+  optionA = songHistory[0];
+  optionB = songHistory[1];
+  optionC = songHistory[2];
+  optionD = songHistory[3];
+  optionE = songHistory[4];
+  optionF = songHistory[5];
   displayMain();
 }

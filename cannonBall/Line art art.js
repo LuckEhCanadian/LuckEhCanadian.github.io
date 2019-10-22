@@ -17,6 +17,8 @@ function setup() {
 }
 
 function draw() {
+  noStroke();
+  fire();
   background(255);
   displayCannon();
   updateBullets();
@@ -34,11 +36,11 @@ function displayCannon(){
   pop();
 }
 
-function mouseDragged(){
+function mouseMoved(){
   fire();
   r = random(0,255);
   g = random(0,255);
-  b = random(0,255)
+  b = random(0,255);
 }
 
 function fire(){

@@ -14,10 +14,16 @@ function setup() {
 
 function draw() {
   noStroke();
-  for(let i = 0; i < shapes.length; i++){
-    shapes[i].y += shapes[i].fall;
-    fill(shapes[i].color);
-    ellipse(shapes[i].x, shapes[i].y, shapes[i].radius*2,shapes[i].radius*2)
+  for(let i = shapes.length - 1; i > 0; i--){
+
+    if (shapes[i].y - shapes[i].radius> height){
+      shapes.splice(i,1);
+    }
+    else{
+      shapes[i].y += shapes[i].fall;
+      fill(shapes[i].color);
+      ellipse(shapes[i].x, shapes[i].y, shapes[i].radius*2,shapes[i].radius*2);
+    }
 
   }
 }
@@ -33,4 +39,8 @@ function mousePressed(){
   };
 
   shapes.push(someShape);
+}
+
+function windowResized(){
+  resizeCanvas(windowWidth, windowHeight);
 }

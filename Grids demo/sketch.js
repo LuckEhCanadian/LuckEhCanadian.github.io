@@ -1,26 +1,54 @@
 let grid = [];
+let cols = 30;
+let rows = 30;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
-  grid = make2dArray(20,20);
+  createCanvas(800, 800);
+  grid = make2dArray(cols, rows);
 }
 
 function draw() {
   background(220);
-  displayGrid(grid)
+  displayGrid(grid);
+  fill(random(0,255));
+}
+
+function keyTyped(){
+  if (key === 'r'){
+    
+  }
+  if(key === 'c'){
+    for(let x = 0; x< cols; x++){
+      for (let y = 0; y < rows; y++){
+        grid[y][x] = 1;
+      }
+    }
+  }
+}
+
+function mousePressed(){
+  let cellSize = width/cols;
+  let xcoord = floor(mouseX/cellSize);
+  let ycoord = floor(mouseY/cellSize);
+  if (grid[ycoord][xcoord] === 1){
+    grid[ycoord][xcoord] = 0;
+  }
+  else{
+    grid[ycoord][xcoord] = 1;
+  }
 }
 
 function displayGrid(theGrid){
   //assumes the grid is a square
-  for(let y = 0; y < theGrid[0].length; y++){
-    for(let x = 0; x< theGrid[0].length; x++){
+  let cellSize = width/ cols;
+  for(let y = 0; y < rows; y++){
+    for(let x = 0; x< cols; x++){
       if (theGrid[y][x]===0){
         fill(255);
       }
       else{
         fill(0);
       }
-      let cellSize = width/ theGrid[0].length;
       rect(x * cellSize, y * cellSize, cellSize, cellSize);
     }
   }

@@ -86,10 +86,12 @@ function displayCircle() {
   // bounce if needed
   if (x > width - radius/2 || x < 0 + radius/2) {
     dx *= -1;
+    dx += 0.5;
   }
 
   if (y > height - radius/2 || y < 0 + radius/2) {
     dy *= -1;
+    dy += 0.5;
   }
 
   fill(0);
@@ -98,12 +100,12 @@ function displayCircle() {
 
 function displayRectangle() {
   // bounce if needed
-  if (x > width - rectSize || x < 0) {
-    dx *= -1;
+  if (x > width - rectSize/2 || x < 0+rectSize/2) {
+    dx *= -1.1;
   }
 
-  if (y > height - rectSize || y < 0) {
-    dy *= -1;
+  if (y > height - rectSize/2 || y < 0+rectSize/2) {
+    dy *= -1.1;
   }
 
   fill(0);

@@ -12,6 +12,7 @@ let chamber;
 let playerX;
 let playerY;
 let cellSize;
+let playerPos;
 
 
 function setup() {
@@ -45,9 +46,6 @@ function displayGrid(grid, rows, cols){
 
 function keyPressed(){
   let cellSize = width/cols;
-  let xCoord = floor(playerX*cellSize);
-  let yCoord = floor(playerY*cellSize);
-
   
   if(key === 'w'){
     playerY -= 1;
@@ -61,4 +59,7 @@ function keyPressed(){
   if(key === 'a'){
     playerX -= 1
   }
+  playerPos = [floor(playerX*cellSize), [floor(playerY*cellSize)]];
+  
+  
 }

@@ -9,8 +9,8 @@ let cols = 20;
 let rows = 20;
 let grid;
 let chamber;
-let playerX;
-let playerY;
+let playerX = 5;
+let playerY = 5;
 let cellSize;
 let playerPos;
 
@@ -23,43 +23,81 @@ function setup() {
   else{
     createCanvas(windowHeight, windowHeight);
   }
-  playerX = 1
-  playerY = 1
+  grid = createRoom();
+  grid[playerX][playerY] = 1;
 }
 
 function draw() {
   displayGrid(grid, rows, cols);
 }
 
-function displayGrid(grid, rows, cols){
-  let cellSize = width/rows;
-  grid = [];
-  for(let x = 0; x < cols; x++){
-    grid.push([]);
-    for(let y = 0; y < rows; y++){
-      grid[x].push([0]);
+function displayGrid(grid, rows, cols) {
+  let cellSize = width / cols;
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      if (grid[y][x] === 0) {
+        fill(255);
+      }
+      else if(grid[y][x] === 2){
+        fill(125);
+      }
+      else {
+        fill(0);
+      }
       rect(x*cellSize, y*cellSize, cellSize, cellSize);
     }
   }
-  return grid;
 }
 
 function keyPressed(){
-  let cellSize = width/cols;
+  grid[playerY][playerX] = 0;
   
   if(key === 'w'){
-    playerY -= 1;
+    if(playerY > 1){
+      playerY -= 1;
+    }
   }
   if (key === 's'){
-    playerY += 1
+    if(playerY < cols-2){
+      playerY += 1
+    }
   }
   if(key === 'd'){
-    playerX += 1
+    if (playerX < cols-2){
+      playerX += 1
+    }
   }
   if(key === 'a'){
-    playerX -= 1
+    if (playerX > 1){
+      playerX -= 1
+    }
   }
-  playerPos = [floor(playerX*cellSize), [floor(playerY*cellSize)]];
-  
-  
+  grid[playerY][playerX] = 1;
+}
+
+function createEmptyGrid(){
+  let emptyGrid = [];
+  for (let x = 0; x < cols; x++) {
+    emptyGrid.push([]);
+    for(let y = 0; y < rows; y++){
+      emptyGrid[x].push(0);
+    }
+  }
+  return emptyGrid;
+}
+
+function createRoom(){
+  let room = [];
+  for (let x = 0; x < cols; x++){
+    room.push([]);
+    for(let y = 0; y < rows; y++){
+      if (x === 0 || y === 0 || x === cols-1 || y === cols-1 || (y === 10 && x === 5)){
+        room[x].push(2);
+      }
+      else{
+        room[x].push(0);
+      }
+    }
+  }
+  return room;
 }

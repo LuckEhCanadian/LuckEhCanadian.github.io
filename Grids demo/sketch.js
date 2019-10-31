@@ -1,6 +1,8 @@
 let grid;
 let rows = 30;
 let cols = 30;
+let playerX = 5;
+let playerY = 5;
 let autoPlay = false;
 
 function setup() {
@@ -10,7 +12,8 @@ function setup() {
   else {
     createCanvas(windowWidth, windowWidth);
   }
-  grid = createRandom2dArray(cols, rows);
+  grid = createEmptyGrid();
+  grid[playerX][playerY] = 1;
 }
 
 function draw() {
@@ -40,9 +43,32 @@ function keyTyped() {
   if (key === ' '){
     update();
   }
-  if (key === 'a'){
-    autoPlay = !autoPlay;
+  //if (key === 'a'){
+    //autoPlay = !autoPlay;
+  //}
+  grid[playerY][playerX] = 0;
+  
+  if(key === 'w'){
+    if(playerY > 0){
+      playerY -= 1;
+    }
   }
+  if (key === 's'){
+    if(playerY < cols-1){
+      playerY += 1
+    }
+  }
+  if(key === 'd'){
+    if (playerX < cols-1){
+      playerX += 1
+    }
+  }
+  if(key === 'a'){
+    if (playerX > 0){
+      playerX -= 1
+    }
+  }
+  grid[playerY][playerX] = 1;
 }
 
 function mousePressed() {

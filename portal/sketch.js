@@ -38,7 +38,7 @@ function displayGrid(grid, rows, cols) {
       if (grid[y][x] === 0) {
         fill(255);
       }
-      else if(grid[y][x] === 2){
+      else if(grid[y][x] === "wall"){
         fill(125);
       }
       else {
@@ -50,25 +50,34 @@ function displayGrid(grid, rows, cols) {
 }
 
 function keyPressed(){
-  grid[playerY][playerX] = 0;
   
   if(key === 'w'){
     if(playerY > 1){
-      playerY -= 1;
+      if (grid[playerX][playerY-1] === "wall"){
+        grid[playerY][playerX] = 0;
+        playerY+=1
+      }
+      else{
+        grid[playerY][playerX] = 0;
+        playerY -= 1;
+      }
     }
   }
   if (key === 's'){
     if(playerY < cols-2){
+      grid[playerY][playerX] = 0;
       playerY += 1
     }
   }
   if(key === 'd'){
     if (playerX < cols-2){
+      grid[playerY][playerX] = 0;
       playerX += 1
     }
   }
   if(key === 'a'){
     if (playerX > 1){
+      grid[playerY][playerX] = 0;
       playerX -= 1
     }
   }
@@ -92,7 +101,7 @@ function createRoom(){
     room.push([]);
     for(let y = 0; y < rows; y++){
       if (x === 0 || y === 0 || x === cols-1 || y === cols-1 || (y === 10 && x === 5)){
-        room[x].push(2);
+        room[x].push("wall");
       }
       else{
         room[x].push(0);

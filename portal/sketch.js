@@ -11,10 +11,10 @@ let grid;
 let chamber;
 let playerX = 5;
 let playerY = 5;
-let orangeX;
-let orangeY;
-let blueX;
-let blueY;
+let orangeX=2;
+let orangeY=2;
+let blueX=2;
+let blueY=3;
 let cellSize;
 let playerPos;
 let portalColor;
@@ -68,8 +68,14 @@ function keyPressed(){
     if (grid[playerY-1][playerX] === "wall"){
     }
     else{
-      grid[playerY][playerX] = 0;
-      playerY -= 1;
+      if(grid[playerY-1][playerX] === grid[blueY][blueX]){
+        grid[playerY][playerX] = 0;
+        grid[playerY][playerX] = grid[orangeY-1][orangeX];
+      }
+      else{
+        grid[playerY][playerX] = 0;
+        playerY -= 1;
+      }
     }
   }
   if (key === 's'){
@@ -113,32 +119,21 @@ function createEmptyGrid(){
 function mousePressed(){
   let cellSize = width/cols;
   if(portalColor === 1){
+    grid[orangeY][orangeX] = 0;
     orangeY = floor(mouseY / cellSize);
     orangeX = floor(mouseX / cellSize);
     if (grid[orangeY][orangeX] != "wall"){
       grid[orangeY][orangeX] = "portalO";
-      if (portalColor === 0){
-        portalColor += 1
-      }
-      else if(portalColor === 3){
-        grid[orangeY][orangeX] = 0;
-        portalColor -= 1
-      }
+      portalColor -= 1;
     }
   }
-  else if(portalColor === 0){
+  else if (portalColor === 0){
     grid[blueY][blueX] = 0;
     blueY = floor(mouseY / cellSize);
     blueX = floor(mouseX / cellSize);
     if (grid[blueY][blueX] != "wall"){
       grid[blueY][blueX] = "portalB";
-      if (portalColor === 1){
-        portalColor += 1
-      }
-      else if (portalColor === 2){
-        grid[orangeY][orangeX] = 0;
-        portalColor += 1
-      }
+      portalColor += 1;
     }
   }
 }

@@ -54,10 +54,11 @@ function keyPressed(){
   if(key === 'w'){
     if(playerY > 1){
       if (grid[playerX][playerY-1] === "wall"){
+        console.log("im walking into a wall now");
         grid[playerY][playerX] = 0;
         playerY+=1
       }
-      else{
+      else if (grid[playerX][playerY-1] != "wall"){
         grid[playerY][playerX] = 0;
         playerY -= 1;
       }

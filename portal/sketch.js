@@ -14,7 +14,7 @@ let playerY = 5;
 let orangeX=2;
 let orangeY=2;
 let blueX=2;
-let blueY=3;
+let blueY=2;
 let cellSize;
 let playerPos;
 let portalColor;
@@ -69,8 +69,22 @@ function keyPressed(){
     }
     else{
       if(grid[playerY-1][playerX] === grid[blueY][blueX]){
-        grid[playerY][playerX] = 0;
-        grid[playerY][playerX] = grid[orangeY-1][orangeX];
+        if (grid[orangeY-1][orangeX] === "wall"){
+        }
+        else{
+          grid[playerY][playerX] = 0;
+          playerY = orangeY-1;
+          playerX = orangeX;
+        }
+      }
+      else if(grid[playerY-1][playerX] === grid[orangeY][orangeX]){
+        if (grid[blueY-1][blueX] === "wall"){
+        }
+        else{
+          grid[playerY][playerX] = 0;
+          playerY = blueY-1;
+          playerX = blueX;
+        }
       }
       else{
         grid[playerY][playerX] = 0;
@@ -82,27 +96,87 @@ function keyPressed(){
     if (grid[playerY+1][playerX] === "wall"){
     }
     else{
-      grid[playerY][playerX] = 0;
-      playerY += 1
+      if(grid[playerY+1][playerX] === grid[blueY][blueX]){
+        if (grid[orangeY+1][orangeX] === "wall"){
+        }
+        else{
+          grid[playerY][playerX] = 0;
+          playerY = orangeY+1;
+          playerX = orangeX;
+        }
+      }
+      else if(grid[playerY+1][playerX] === grid[orangeY][orangeX]){
+        if (grid[blueY+1][blueX] === "wall"){
+        }
+        else{
+          grid[playerY][playerX] = 0;
+          playerY = blueY+1;
+          playerX = blueX;
+        }
+      }
+      else{
+        grid[playerY][playerX] = 0;
+        playerY += 1;
+      }
     }
   }
   if(key === 'd'){
     if (grid[playerY][playerX+1] === "wall"){
     }
     else{
-      grid[playerY][playerX] = 0;
-      playerX += 1
+      if(grid[playerY][playerX+1] === grid[blueY][blueX]){
+        if (grid[orangeY][orangeX+1] === "wall"){
+        }
+        else{
+          grid[playerY][playerX] = 0;
+          playerY = orangeY;
+          playerX = orangeX+1;
+        }
+      }
+      else if(grid[playerY][playerX+1] === grid[orangeY][orangeX]){
+        if (grid[blueY][blueX+1] === "wall"){
+        }
+        else{
+          grid[playerY][playerX] = 0;
+          playerY = blueY;
+          playerX = blueX+1;
+        }
+      }
+      else{
+        grid[playerY][playerX] = 0;
+        playerX += 1;
+      }
     }
   }
   if(key === 'a'){
     if (grid[playerY][playerX-1] === "wall"){
     }
     else{
-      grid[playerY][playerX] = 0;
-      playerX -= 1
+      if(grid[playerY][playerX-1] === grid[blueY][blueX]){
+        if (grid[orangeY][orangeX-1] === "wall"){
+        }
+        else{
+          grid[playerY][playerX] = 0;
+          playerY = orangeY;
+          playerX = orangeX-1;
+        }
+      }
+      else if(grid[playerY][playerX-1] === grid[orangeY][orangeX]){
+        if (grid[blueY][blueX-1] === "wall"){
+        }
+        else{
+          grid[playerY][playerX] = 0;
+          playerY = blueY;
+          playerX = blueX-1;
+        }
+      }
+      else{
+        grid[playerY][playerX] = 0;
+        playerX -= 1;
+      }
     }
-  }
   grid[playerY][playerX] = 1;
+  }
 }
 
 function createEmptyGrid(){

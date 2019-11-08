@@ -18,12 +18,14 @@ let blueY=2;
 let cellSize;
 let playerPos;
 let portalColor;
+let pressed = false;
 
 
 function setup() {
   if (windowHeight > windowWidth){
     createCanvas(windowWidth, windowWidth);
     cellSize = height/cols;
+    state = "chamber1"
   }
   else{
     createCanvas(windowHeight, windowHeight);
@@ -54,6 +56,17 @@ function displayGrid(grid, rows, cols) {
       else if(grid[y][x] === "portalB"){
         fill(0,177,255);
       }
+      else if(grid[y][x] === "button"){
+        fill(255,0,0);
+      }
+      else if(grid[y][x] === "door"){
+        if (pressed === false){
+          fill(50);
+        }
+        else if(pressed === true){
+          fill(100);
+        }
+      }
       else {
         fill(0);
       }
@@ -63,9 +76,27 @@ function displayGrid(grid, rows, cols) {
 }
 
 function keyPressed(){
+  if (key === 'e'){
+    if(grid[playerY-1][playerX] === "button" || grid[playerY+1][playerX] === "button" || grid[playerY][playerX-1] === "button"|| grid[playerY][playerX+1] === "button"){
+      pressed = true;
+    }
+  }
+  if(grid[playerY][playerX+1] === "door"){
+    if(pressed === true){
+      if (state === "chamber1"){
+        state = "chamber2"
+      }
+      else{
+        playerX -=1;
+      }
+    }
+    else{
+      playerX -=1;
+    }
+  }
   
   if(key === 'w'){
-    if (grid[playerY-1][playerX] === "wall"){
+    if (grid[playerY-1][playerX] === "wall"||grid[playerY-1][playerX] === "button"){
     }
     else{
       if(grid[playerY-1][playerX] === grid[blueY][blueX]){
@@ -93,7 +124,7 @@ function keyPressed(){
     }
   }
   if (key === 's'){
-    if (grid[playerY+1][playerX] === "wall"){
+    if (grid[playerY+1][playerX] === "wall"||grid[playerY+1][playerX] === "button"){
     }
     else{
       if(grid[playerY+1][playerX] === grid[blueY][blueX]){
@@ -121,7 +152,7 @@ function keyPressed(){
     }
   }
   if(key === 'd'){
-    if (grid[playerY][playerX+1] === "wall"){
+    if (grid[playerY][playerX+1] === "wall"||grid[playerY][playerX+1] === "button"){
     }
     else{
       if(grid[playerY][playerX+1] === grid[blueY][blueX]){
@@ -149,7 +180,7 @@ function keyPressed(){
     }
   }
   if(key === 'a'){
-    if (grid[playerY][playerX-1] === "wall"){
+    if (grid[playerY][playerX-1] === "wall"||grid[playerY][playerX-1] === "button"){
     }
     else{
       if(grid[playerY][playerX-1] === grid[blueY][blueX]){
@@ -175,20 +206,10 @@ function keyPressed(){
         playerX -= 1;
       }
     }
-  grid[playerY][playerX] = 1;
   }
+  grid[playerY][playerX] = 1;
 }
 
-function createEmptyGrid(){
-  let emptyGrid = [];
-  for (let x = 0; x < cols; x++) {
-    emptyGrid.push([]);
-    for(let y = 0; y < rows; y++){
-      emptyGrid[x].push(0);
-    }
-  }
-  return emptyGrid;
-}
 
 function mousePressed(){
   let cellSize = width/cols;
@@ -200,6 +221,12 @@ function mousePressed(){
       grid[orangeY][orangeX] = "portalO";
       portalColor -= 1;
     }
+    else{
+      grid[orangeY][orangeX] = "wall";
+      orangeY = 1;
+      orangeX = 1;
+      portalColor -= 1;
+    }
   }
   else if (portalColor === 0){
     grid[blueY][blueX] = 0;
@@ -207,6 +234,12 @@ function mousePressed(){
     blueX = floor(mouseX / cellSize);
     if (grid[blueY][blueX] != "wall"){
       grid[blueY][blueX] = "portalB";
+      portalColor += 1;
+    }
+    else{
+      grid[blueY][blueX] = "wall";
+      blueY = 1;
+      blueX = 1;
       portalColor += 1;
     }
   }
@@ -218,8 +251,33 @@ function createRoom(){
     for (let x = 0; x < cols; x++){
       room.push([]);
       for(let y = 0; y < rows; y++){
-        if (x === 0 || y === 0 || x === cols-1 || y === cols-1 || (y === 10 && x === 5)){
+        if (x === 0 || y === 0 || x === cols-1 || y === cols-1 || (y === 10)){
           room[x].push("wall");
+        }
+        else if(x === 7 && y === 7){
+          room[x].push("button");
+        }
+        else if(y === cols-2 && (x === 5 || x === 6)){
+          room[x].push("door");
+        }
+        else{
+          room[x].push(0);
+        }
+      }
+    }
+  }
+  else if (state === "chamber2"){
+    for (let x = 0; x < cols; x++){
+      room.push([]);
+      for(let y = 0; y < rows; y++){
+        if (x === 0 || y === 0 || x === cols-1 || y === cols-1 || (y === 10)){
+          room[x].push("wall");
+        }
+        else if(x === 7 && y === 7){
+          room[x].push("button");
+        }
+        else if(y === cols-2 && (x === 5 || x === 6)){
+          room[x].push("door");
         }
         else{
           room[x].push(0);

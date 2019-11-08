@@ -81,22 +81,18 @@ function keyPressed(){
       pressed = true;
     }
   }
-  if(grid[playerY][playerX+1] === "door"){
-    if(pressed === true){
-      if (state === "chamber1"){
-        state = "chamber2"
-      }
-      else{
-        playerX -=1;
-      }
-    }
-    else{
-      playerX -=1;
-    }
-  }
   
   if(key === 'w'){
     if (grid[playerY-1][playerX] === "wall"||grid[playerY-1][playerX] === "button"){
+    }
+    else if(grid[playerY-1][playerX] === "door"){
+      if (pressed === true){
+        state = "chamber2"
+        grid = createRoom();
+        pressed = false;
+      }
+      else{
+      }
     }
     else{
       if(grid[playerY-1][playerX] === grid[blueY][blueX]){
@@ -126,6 +122,15 @@ function keyPressed(){
   if (key === 's'){
     if (grid[playerY+1][playerX] === "wall"||grid[playerY+1][playerX] === "button"){
     }
+    else if(grid[playerY+1][playerX] === "door"){
+      if (pressed === true){
+        state = "chamber2"
+        grid = createRoom();
+        pressed = false;
+      }
+      else{
+      }
+    }
     else{
       if(grid[playerY+1][playerX] === grid[blueY][blueX]){
         if (grid[orangeY+1][orangeX] === "wall"){
@@ -154,6 +159,15 @@ function keyPressed(){
   if(key === 'd'){
     if (grid[playerY][playerX+1] === "wall"||grid[playerY][playerX+1] === "button"){
     }
+    else if(grid[playerY][playerX+1] === "door"){
+      if (pressed === true){
+        state = "chamber2"
+        grid = createRoom();
+        pressed = false;
+      }
+      else{
+      }
+    }
     else{
       if(grid[playerY][playerX+1] === grid[blueY][blueX]){
         if (grid[orangeY][orangeX+1] === "wall"){
@@ -181,6 +195,15 @@ function keyPressed(){
   }
   if(key === 'a'){
     if (grid[playerY][playerX-1] === "wall"||grid[playerY][playerX-1] === "button"){
+    }
+    else if(grid[playerY][playerX-1] === "door"){
+      if (pressed === true){
+        state = "chamber2"
+        grid = createRoom();
+        pressed = false;
+      }
+      else{
+      }
     }
     else{
       if(grid[playerY][playerX-1] === grid[blueY][blueX]){
@@ -217,9 +240,21 @@ function mousePressed(){
     grid[orangeY][orangeX] = 0;
     orangeY = floor(mouseY / cellSize);
     orangeX = floor(mouseX / cellSize);
-    if (grid[orangeY][orangeX] != "wall"){
+    if (grid[orangeY][orangeX] != "wall"&& grid[orangeY][orangeX] != "door" && grid[orangeY][orangeX] != "button"){
       grid[orangeY][orangeX] = "portalO";
       portalColor -= 1;
+    }
+    else if(grid[orangeY][orangeY] === "button"){
+      grid[orangeY][orangeX] = "button";
+      orangeY = 1;
+      orangeX = 1;
+      portalColor += 1;
+    }
+    else if(grid[orangeY][orangeY] === "door"){
+      grid[orangeY][orangeX] = "door";
+      orangeY = 1;
+      orangeX = 1;
+      portalColor += 1;
     }
     else{
       grid[orangeY][orangeX] = "wall";
@@ -232,8 +267,20 @@ function mousePressed(){
     grid[blueY][blueX] = 0;
     blueY = floor(mouseY / cellSize);
     blueX = floor(mouseX / cellSize);
-    if (grid[blueY][blueX] != "wall"){
+    if (grid[blueY][blueX] != "wall"&& grid[blueY][blueX] != "door" && grid[blueY][blueX] != "button"){
       grid[blueY][blueX] = "portalB";
+      portalColor += 1;
+    }
+    else if(grid[blueY][blueY] === "button"){
+      grid[blueY][blueX] = "button";
+      blueY = 1;
+      blueX = 1;
+      portalColor += 1;
+    }
+    else if(grid[blueY][blueY] === "door"){
+      grid[blueY][blueX] = "door";
+      blueY = 1;
+      blueX = 1;
       portalColor += 1;
     }
     else{
@@ -251,7 +298,7 @@ function createRoom(){
     for (let x = 0; x < cols; x++){
       room.push([]);
       for(let y = 0; y < rows; y++){
-        if (x === 0 || y === 0 || x === cols-1 || y === cols-1 || (y === 10)){
+        if (x === 0 || y === 0 || x === cols-1 || y === cols-1 || (y === 10)|| (x === 15 && y >= 10 || (x === 11 && y <= 10))){
           room[x].push("wall");
         }
         else if(x === 7 && y === 7){
@@ -267,10 +314,12 @@ function createRoom(){
     }
   }
   else if (state === "chamber2"){
+    playerY = 5;
+    playerX = 5;
     for (let x = 0; x < cols; x++){
       room.push([]);
       for(let y = 0; y < rows; y++){
-        if (x === 0 || y === 0 || x === cols-1 || y === cols-1 || (y === 10)){
+        if (x === 0 || y === 0 || x === cols-1 || y === cols-1 || (x === 15 && y <= 15)){
           room[x].push("wall");
         }
         else if(x === 7 && y === 7){

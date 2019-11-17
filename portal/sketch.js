@@ -4,7 +4,7 @@
 //
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
-
+//This is where i declare all of my global variables
 let cols = 20;
 let rows = 20;
 let grid;
@@ -20,7 +20,7 @@ let playerPos;
 let portalColor;
 let pressed = false;
 
-
+//Setup loop where i make the game not explode when it opens
 function setup() {
   if (windowHeight > windowWidth){
     createCanvas(windowWidth, windowWidth);
@@ -35,11 +35,11 @@ function setup() {
   grid[playerX][playerY] = 1;
   portalColor = 1;
 }
-
+//calling my display function
 function draw() {
   displayGrid(grid, rows, cols);
 }
-
+//displaying all the different parts of the grid
 function displayGrid(grid, rows, cols) {
   let cellSize = width / cols;
   for (let y = 0; y < rows; y++) {
@@ -74,7 +74,7 @@ function displayGrid(grid, rows, cols) {
     }
   }
 }
-
+//this is checking when keys are pressed in each room to move or open buttons
 function keyPressed(){
   if (key === 'e'){
     if(grid[playerY-1][playerX] === "button" || grid[playerY+1][playerX] === "button" || grid[playerY][playerX-1] === "button"|| grid[playerY][playerX+1] === "button"){
@@ -233,7 +233,7 @@ function keyPressed(){
   grid[playerY][playerX] = 1;
 }
 
-
+//this is mostly placing portals although there will probably be more in the final project
 function mousePressed(){
   let cellSize = width/cols;
   if(portalColor === 1){
@@ -292,6 +292,7 @@ function mousePressed(){
   }
 }
 
+//this is where i make each different room
 function createRoom(){
   let room = [];
   if (state === "chamber1"){
